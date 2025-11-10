@@ -10,3 +10,7 @@ Docker-compose setup to test use of GitLab CE together with Gitlab Runner. More 
 
 * bamboo-setup:  
 Docker-compose setup to test Bamboo DataCenter.  Three containers are created via the Docker-compose file: Bamboo Server + PostgreSQL Instance + Bamboo Agent.
+
+* Reflex:  
+Docker-compose setup to test python Reflex framework for frontend and backend.  Three containers are created via the Docker-compose file: Frontend + Backend + Redis (not used in current version).
+

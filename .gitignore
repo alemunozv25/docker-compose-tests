@@ -3,9 +3,6 @@ __pycache__/
 *.py[codz]
 *$py.class
 
-# PKL files
-*.pkl
-
 # C extensions
 *.so
 
@@ -208,3 +205,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# .DS_Store
+.DS_Store
