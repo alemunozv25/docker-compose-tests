@@ -1,0 +1,40 @@
+services:
+
+  n8n:
+    # image: docker.n8n.io/n8nio/n8n
+    image: docker.n8n.io/n8nio/n8n:1.113.3
+    restart: always
+    ports:
+      - "5678:5678"
+      # - "127.0.0.1:5678:5678"
+    environment:
+      - N8N_HOST=localhost # Or your domain/IP if publicly accessible
+      - N8N_PROTOCOL=https
+      - N8N_PORT=5678
+      - GENERIC_TIMEZONE=America/New_York
+      - TZ=America/New_York
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - DB_SQLITE_POOL_SIZE=1
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_GIT_NODE_DISABLE_BARE_REPOS=true
+      - N8N_SECURE_COOKIE=false                 #Ensures that cookies are only sent over HTTPS, enhancing security.
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false     #Access environment variables from the Code Node or from expressions.
+      - N8N_SSL_CERT=/ssl/n8n.test.crt
+      - N8N_SSL_KEY=/ssl/n8n.test.key
+      # - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
+      # - NODE_ENV=production
+      # - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
+      # - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      # - TZ=${GENERIC_TIMEZONE}
+    volumes:
+      - n8n_data_old:/home/node/.n8n
+      - ./local-files:/files     #Make sure that local-files folder has been created before using the files folder
+      - ${HOME}/local-certs/n8n:/ssl:ro # bind existing certs in local HOME folder to container's cert
+      # - ~/local-certs/n8n:/ssl:ro # bind existing cert to the container's cert
+      # - /etc/ssl/local-n8n:/ssl:ro  # bind to the container's cert
+      # - /etc/ssl/certs/:/etc/ssl/certs/:ro  # bind to the host's CA list
+
+volumes:
+  n8n_data_old: 
+    external: true
+
